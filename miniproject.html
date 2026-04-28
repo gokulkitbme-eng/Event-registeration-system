@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        input, button {
+            width: 90%;
+            padding: 8px;
+            margin: 8px;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+        }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Event Registration</h2>
+
+    <p>Available Seats: <span id="seats">5</span></p>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <button onclick="register()">Register</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    let seats = 5;
+
+    function register() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message");
+
+        // Validation
+        if (name === "" || email === "") {
+            message.innerHTML = "Please fill all fields!";
+            message.className = "error";
+            return;
+        }
+
+        // Seat check
+        if (seats <= 0) {
+            message.innerHTML = "No seats available!";
+            message.className = "error";
+            return;
+        }
+
+        // Success
+        seats--;
+        document.getElementById("seats").innerText = seats;
+
+        message.innerHTML = "Registration Successful!";
+        message.className = "success";
+
+        // Clear fields
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+    }
+</script>
+
+</body>
+</html>
